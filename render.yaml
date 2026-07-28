@@ -1,27 +1,11 @@
 services:
-  # 1. Express Backend Web Service
   - type: web
-    name: ai-fridge-backend
+    name: ai-fridge-to-recipe
     env: node
-    rootDir: server
-    buildCommand: npm install
+    buildCommand: npm run postinstall
     startCommand: npm start
     envVars:
       - key: GEMINI_API_KEY
-        sync: false # User will be prompted to enter this key on Render dashboard
+        sync: false
       - key: PORT
         value: 5000
-
-  # 2. React Frontend Static Site
-  - type: web
-    name: ai-fridge-frontend
-    runtime: static
-    rootDir: client
-    buildCommand: npm install && npm run build
-    staticPublishPath: ./dist
-    envVars:
-      - key: VITE_API_URL
-        fromService:
-          type: web
-          name: ai-fridge-backend
-          property: host
