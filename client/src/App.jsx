@@ -67,8 +67,9 @@ export default function App() {
     setRecipe(null);
 
     try {
+      const apiBase = import.meta.env.VITE_API_URL || "";
       const response = await axios.post(
-        "http://localhost:5000/api/generate-recipe",
+        `${apiBase}/api/generate-recipe`,
         { ingredients },
         { signal: controller.signal }
       );
